@@ -8,6 +8,8 @@
 
 *Designed and tested by [PINGEQUA](https://www.pingequa.com/) — open-sourced for the Cardputer ADV community.*
 
+![CC1101 + NRF24 wiring to Cardputer ADV H1/H2 expansion headers](docs/images/pin-map.png)
+
 ---
 
 ## What You Get

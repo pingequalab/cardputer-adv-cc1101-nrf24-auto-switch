@@ -2,6 +2,8 @@
 
 Full GPIO assignments for the CC1101 + NRF24 dual-radio setup on the M5Stack Cardputer ADV.
 
+![Pin map: CC1101 + NRF24 wiring to Cardputer ADV H1/H2 expansion headers](images/pin-map.png)
+
 ---
 
 ## Quick Reference
