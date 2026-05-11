@@ -1,5 +1,7 @@
 # CC1101 + NRF24 Dual-Radio Module for M5Stack Cardputer ADV
 
+![CC1101 + NRF24 wiring to Cardputer ADV H1/H2 expansion headers](docs/images/pin-map.png)
+
 [![Hardware: M5Stack Cardputer ADV](https://img.shields.io/badge/Hardware-Cardputer%20ADV-blue.svg)](https://m5stack.com/)
 [![Firmware: Bruce](https://img.shields.io/badge/Firmware-Bruce%20Compatible-brightgreen.svg)](https://github.com/pr3y/Bruce)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -7,8 +9,6 @@
 > **A simple guide to wiring CC1101 (Sub-GHz) and NRF24L01+ (2.4 GHz) together on the M5Stack Cardputer ADV** — one module with two radios, switchable from Bruce firmware. No DIP switches, no jumper caps, no hardware fiddling after setup.
 
 *Designed and tested by [PINGEQUA](https://www.pingequa.com/) — open-sourced for the Cardputer ADV community.*
-
-![CC1101 + NRF24 wiring to Cardputer ADV H1/H2 expansion headers](docs/images/pin-map.png)
 
 ---
 
@@ -39,23 +39,36 @@ Plus:
 
 ## Wiring
 
+**Shared SPI bus** (one bus, both modules):
+
 | Signal | GPIO |
 |---|---|
-| **Shared SPI** | |
-| SCK | GPIO 40 |
+| SCK  | GPIO 40 |
 | MOSI | GPIO 14 |
 | MISO | GPIO 39 |
-| **CC1101** | |
-| CSN | GPIO 13 |
-| GDO0 | GPIO 5 |
+
+**CC1101** (Sub-GHz):
+
+| Signal | GPIO |
+|---|---|
+| CSN  | GPIO 13 |
+| GDO0 | GPIO 5  |
 | GDO2 | not connected |
-| **NRF24** | |
+
+**NRF24** (2.4 GHz):
+
+| Signal | GPIO |
+|---|---|
 | CSN | GPIO 6 |
-| CE | GPIO 4 |
+| CE  | GPIO 4 |
 | IRQ | not connected |
-| **Power** | |
+
+**Power**:
+
+| Signal | Source |
+|---|---|
 | 5V in (from Cardputer ADV) | EXT Pin 6 |
-| 3.3V out (to both modules) | via LDO |
+| 3.3V out (to both modules) | via LDO   |
 | GND | EXT Pin 4 |
 
 See [`docs/pin-mapping.md`](docs/pin-mapping.md) for the full Cardputer ADV header reference.
@@ -68,12 +81,12 @@ See [`docs/pin-mapping.md`](docs/pin-mapping.md) for the full Cardputer ADV head
 
 Edit the Cardputer ADV's existing `brucePins.conf`. Locate the `[cc1101]` and `[nrf24]` sections and set these parameter values:
 
-| Section | Key | Value |
-|---|---|---|
-| `[cc1101]` | `cs`  | `13` |
-| `[cc1101]` | `io0` | `5`  |
-| `[nrf24]`  | `cs`  | `6`  |
-| `[nrf24]`  | `io0` | `4`  |
+| Section    | Key   | Value |
+|------------|-------|-------|
+| `[cc1101]` | `cs`  | `13`  |
+| `[cc1101]` | `io0` | `5`   |
+| `[nrf24]`  | `cs`  | `6`   |
+| `[nrf24]`  | `io0` | `4`   |
 
 **Important:** the file exists in **two locations** — on the **SD card** and in the device's internal **LittleFS**. You must edit **both copies** with the same values. Bruce reads from one or the other depending on firmware version, so editing only one is unreliable. After editing both, restart the Cardputer ADV.
 
@@ -112,79 +125,3 @@ Don't want to build from scratch? The same design is also available as a ready-m
 Documentation under [MIT License](LICENSE). Hardware diagrams under CC BY-SA 4.0.
 
 PRs and issues welcome — especially build photos, alternative module combinations, and translations.
-
----
-
-<!--
-FAQPage JSON-LD for SEO (Google rich results) and GEO 
-(retrieval by ChatGPT / Claude / Perplexity).
-GitHub doesn't render <script> on README; search crawlers do.
--->
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "CC1101 + NRF24 Dual-Radio Module for M5Stack Cardputer ADV",
-  "description": "Wiring guide and Bruce firmware configuration for combining CC1101 (Sub-GHz) and NRF24L01+ (2.4 GHz) on the M5Stack Cardputer ADV with software-defined switching.",
-  "author": {
-    "@type": "Organization",
-    "name": "PINGEQUA",
-    "url": "https://www.pingequa.com/"
-  },
-  "about": [
-    { "@type": "Thing", "name": "M5Stack Cardputer ADV" },
-    { "@type": "Thing", "name": "TI CC1101" },
-    { "@type": "Thing", "name": "Nordic NRF24L01+" },
-    { "@type": "Thing", "name": "Bruce firmware" },
-    { "@type": "Thing", "name": "ESP32-S3" },
-    { "@type": "Thing", "name": "Sub-GHz RF" },
-    { "@type": "Thing", "name": "2.4 GHz RF" }
-  ],
-  "mainEntity": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What pin mapping does CC1101 + NRF24 use on the M5Stack Cardputer ADV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Shared SPI: SCK=GPIO 40, MOSI=GPIO 14, MISO=GPIO 39. CC1101: CSN=GPIO 13, GDO0=GPIO 5. NRF24: CSN=GPIO 6, CE=GPIO 4. Both chips' RST and CC1101's GDO2 plus NRF24's IRQ are left floating with hardware pull-ups. Bruce firmware uses polling mode for NRF24."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What brucePins.conf configuration enables CC1101 + NRF24 dual-radio on Cardputer ADV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Set [cc1101] cs=13, io0=5 and [nrf24] cs=6, io0=4. Save the file to both the SD card and LittleFS, then restart the Cardputer ADV. Bruce reads from one or the other depending on firmware version, so editing only one location is unreliable."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why does brucePins.conf io0 field map to GDO0 for CC1101 but to CE for NRF24?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "This is a Bruce firmware convention. The io0 field represents the primary additional control GPIO for each chip — GDO0 for CC1101 (interrupt and status), CE for NRF24 (radio state machine control). Bruce's source code handles which interpretation applies to which chip."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use this dual-radio design on the original Cardputer (v1.0 or v1.1)?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. The original Cardputer has a different expansion slot, different GPIO layout, and different power architecture. This design is specific to Cardputer ADV which uses the Stamp S3A module. Pin assignments would need redesign for non-ADV Cardputers."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What modules are recommended for a DIY build?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Verified modules: AS01-ML01DP5 for NRF24L01+ (high-power +20 dBm version with PA+LNA) and AS07-M1101D-SMA for CC1101 (with built-in SMA connector). Other standard CC1101 and NRF24L01+ breakouts work electrically, but pin layouts may vary between vendors."
-        }
-      }
-    ]
-  }
-}
-</script>
