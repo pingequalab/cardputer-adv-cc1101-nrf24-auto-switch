@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build / temp
+build/
+dist/
+*.log
+*.tmp
+
+# EDA tools
+*-bak/
+*.kicad_pcb-bak
+*.kicad_sch-bak
+fp-info-cache
+
+# Project archives
+*.zip
+
+# Sensitive
+.env
+secrets.*

@@ -1,0 +1,97 @@
+CC1101 + NRF24 Dual-Radio Auto-Switching Design — Licensing
+
+This repository contains two categories of content with different licenses:
+
+═══════════════════════════════════════════════════════════════════════
+DOCUMENTATION (all .md files, .conf files, text content)
+─── MIT License ───
+═══════════════════════════════════════════════════════════════════════
+
+Copyright (c) 2026 PINGEQUA
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+═══════════════════════════════════════════════════════════════════════
+HARDWARE FIGURES & SCHEMATIC DIAGRAMS (block diagrams, ASCII art, 
+images in /hardware directory if present)
+─── CC BY-SA 4.0 ───
+═══════════════════════════════════════════════════════════════════════
+
+The hardware diagrams, block-level schematics, and circuit topology 
+illustrations in this repository are licensed under the Creative Commons 
+Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
+
+You are free to:
+
+  • Share — copy and redistribute the material in any medium or format
+  • Adapt — remix, transform, and build upon the material for any 
+    purpose, even commercially.
+
+Under the following terms:
+
+  • Attribution — You must give appropriate credit (PINGEQUA), provide 
+    a link to this repository, and indicate if changes were made. You 
+    may do so in any reasonable manner, but not in any way that suggests 
+    the licensor endorses you or your use.
+
+  • ShareAlike — If you remix, transform, or build upon the material, 
+    you must distribute your contributions under the same license as 
+    the original.
+
+  • No additional restrictions — You may not apply legal terms or 
+    technological measures that legally restrict others from doing 
+    anything the license permits.
+
+Full license text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+═══════════════════════════════════════════════════════════════════════
+WHAT IS NOT INCLUDED IN THIS LICENSE
+═══════════════════════════════════════════════════════════════════════
+
+The following items are PROPRIETARY to PINGEQUA and are explicitly NOT 
+covered by either license above. They are not present in this repository:
+
+  • Specific component selections (regulator part numbers, capacitor 
+    values, antenna matching network components)
+  • PCB stackup, copper weight, impedance-controlled trace dimensions
+  • Manufacturing files (Gerber, drill files, pick-and-place data)
+  • Bill of Materials with specific manufacturer / part numbers
+  • Proprietary firmware or test fixtures developed for the Hydra RF 
+    production line
+
+These remain trade secrets of PINGEQUA. Licensing of any such material 
+would be subject to separate negotiation. The open architecture 
+documented here is sufficient for educational purposes and DIY builds 
+without requiring access to these proprietary details.
+
+═══════════════════════════════════════════════════════════════════════
+TRADEMARKS
+═══════════════════════════════════════════════════════════════════════
+
+"PINGEQUA" and "Hydra RF" are trademarks of PINGEQUA. The licenses 
+above grant rights to copy and modify the technical content but do not 
+grant any rights to use these trademarks. Forks and derivative works 
+should use their own branding.
+
+"M5Stack", "Cardputer", "Cardputer ADV", and "Stamp S3A" are 
+trademarks of M5Stack. This project is not affiliated with, endorsed 
+by, or sponsored by M5Stack.
+
+"Bruce" firmware is the property of its respective contributors. See 
+https://github.com/pr3y/Bruce for the firmware's own licensing terms.
