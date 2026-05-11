@@ -3,7 +3,7 @@
 ![CC1101 + NRF24 wiring to Cardputer ADV H1/H2 expansion headers](docs/images/pin-map.png)
 
 [![Hardware: M5Stack Cardputer ADV](https://img.shields.io/badge/Hardware-Cardputer%20ADV-blue.svg)](https://m5stack.com/)
-[![Firmware: Bruce](https://img.shields.io/badge/Firmware-Bruce%20Compatible-brightgreen.svg)](https://github.com/pr3y/Bruce)
+[![Firmware: Bruce](https://img.shields.io/badge/Firmware-Bruce%20Compatible-brightgreen.svg)](https://github.com/BruceDevices/firmware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A simple guide to wiring CC1101 (Sub-GHz) and NRF24L01+ (2.4 GHz) together on the M5Stack Cardputer ADV** — one module with two radios, switchable from Bruce firmware. No DIP switches, no jumper caps, no hardware fiddling after setup.
@@ -109,7 +109,7 @@ If anything doesn't work, see [`docs/troubleshooting.md`](docs/troubleshooting.m
 ## Notes
 
 - This works only on the **Cardputer ADV** (Stamp S3A version). The original Cardputer v1.0 / v1.1 has a different expansion slot and will not work.
-- Bruce firmware is not pre-installed — flash it yourself from [github.com/pr3y/Bruce](https://github.com/pr3y/Bruce).
+- Bruce firmware is not pre-installed — flash it yourself from [github.com/BruceDevices/firmware](https://github.com/BruceDevices/firmware).
 - Bruce's `brucePins.conf` uses the `io0` field for different signals depending on the chip: GDO0 for CC1101, CE for NRF24. Bruce's source handles this internally.
 
 ---
