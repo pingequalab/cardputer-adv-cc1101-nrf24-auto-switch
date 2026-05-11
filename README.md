@@ -32,7 +32,6 @@ Two off-the-shelf modules:
 Plus:
 
 - 1× 3.3V LDO regulator (AMS1117-3.3 or similar, 300 mA+)
-- A few decoupling capacitors (10 µF + 100 nF per module is fine)
 - Hookup wire or Dupont jumpers
 - 2× SMA antennas (one for your Sub-GHz band, one for 2.4 GHz)
 
@@ -67,21 +66,16 @@ See [`docs/pin-mapping.md`](docs/pin-mapping.md) for the full Cardputer ADV head
 
 ## Configuration
 
-Copy this to the Cardputer ADV's `brucePins.conf` file:
+Edit the Cardputer ADV's existing `brucePins.conf`. Locate the `[cc1101]` and `[nrf24]` sections and set these parameter values:
 
-```ini
-[cc1101]
-cs  = 13
-io0 = 5
+| Section | Key | Value |
+|---|---|---|
+| `[cc1101]` | `cs`  | `13` |
+| `[cc1101]` | `io0` | `5`  |
+| `[nrf24]`  | `cs`  | `6`  |
+| `[nrf24]`  | `io0` | `4`  |
 
-[nrf24]
-cs  = 6
-io0 = 4
-```
-
-A ready-to-use file is at [`firmware/brucePins.conf`](firmware/brucePins.conf).
-
-**Important:** save it to **both the SD card and LittleFS**, then restart the Cardputer ADV. Bruce reads from one or the other depending on firmware version — saving to only one is unreliable.
+**Important:** the file exists in **two locations** — on the **SD card** and in the device's internal **LittleFS**. You must edit **both copies** with the same values. Bruce reads from one or the other depending on firmware version, so editing only one is unreliable. After editing both, restart the Cardputer ADV.
 
 To access the WebUI for editing: on the Cardputer go to **Files → WebUI**, connect to your Wi-Fi, then open the IP address shown on screen in a browser. Default login: `admin` / `bruce`.
 
