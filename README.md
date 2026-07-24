@@ -79,16 +79,22 @@ See [`docs/pin-mapping.md`](docs/pin-mapping.md) for the full Cardputer ADV head
 
 ## Configuration
 
-Edit the Cardputer ADV's existing `brucePins.conf`. Locate the `[cc1101]` and `[nrf24]` sections and set these parameter values:
+Bruce keeps pin assignments in `/brucePins.conf`. It is a **JSON** file, and its top-level key is your device's Wi-Fi STA MAC address in uppercase colon-separated form. Edit the `CC1101_Pins` and `NRF24_Pins` sections:
 
-| Section    | Key   | Value |
-|------------|-------|-------|
-| `[cc1101]` | `cs`  | `13`  |
-| `[cc1101]` | `io0` | `5`   |
-| `[nrf24]`  | `cs`  | `6`   |
-| `[nrf24]`  | `io0` | `4`   |
+```json
+{
+  "A1:B2:C3:D4:E5:F6": {
+    "CC1101_Pins": { "sck": 40, "miso": 39, "mosi": 14, "cs": 13, "io0": 5, "io2": -1 },
+    "NRF24_Pins":  { "sck": 40, "miso": 39, "mosi": 14, "cs": 6,  "io0": 4, "io2": -1 }
+  }
+}
+```
 
-**Important:** the file exists in **two locations** — on the **SD card** and in the device's internal **LittleFS**. You must edit **both copies** with the same values. Bruce reads from one or the other depending on firmware version, so editing only one is unreliable. After editing both, restart the Cardputer ADV.
+Replace `A1:B2:C3:D4:E5:F6` with your own device's MAC — Bruce ignores any block whose key doesn't match. If the file already exists, your MAC is already the top-level key; just edit the values underneath it.
+
+The `sck` / `miso` / `mosi` values above are Bruce's defaults for the Cardputer family, so in practice only `cs` and `io0` need changing. `io0` carries a different signal per chip: **GDO0** for CC1101, **CE** for NRF24. `io2` is unused in this design.
+
+**Which copy to edit:** the file lives in the device's internal LittleFS and, if you use one, on the SD card. Bruce reads whichever storage is active — **SD card if one is mounted, LittleFS otherwise**. So edit the copy on the storage you actually boot with; if you normally run with an SD card inserted, that is the SD copy. Restart after editing.
 
 To access the WebUI for editing: on the Cardputer go to **Files → WebUI**, connect to your Wi-Fi, then open the IP address shown on screen in a browser. Default login: `admin` / `bruce`.
 
@@ -110,7 +116,8 @@ If anything doesn't work, see [`docs/troubleshooting.md`](docs/troubleshooting.m
 
 - This works only on the **Cardputer ADV** (Stamp S3A version). The original Cardputer v1.0 / v1.1 has a different expansion slot and will not work.
 - Bruce firmware is not pre-installed — flash it yourself from [github.com/BruceDevices/firmware](https://github.com/BruceDevices/firmware).
-- Bruce's `brucePins.conf` uses the `io0` field for different signals depending on the chip: GDO0 for CC1101, CE for NRF24. Bruce's source handles this internally.
+- **Why reassigning pins is necessary:** Bruce's stock Cardputer build points both radios at the same pins — `CC1101_SS_PIN` and `NRF24_SS_PIN` both resolve to GPIO 1, and `CC1101_GDO0_PIN` and `NRF24_CE_PIN` both to GPIO 2 (see `boards/m5stack-cardputer/m5stack-cardputer.ini`). That is fine with a single module attached, but it makes the two impossible to run side by side. Giving each chip its own CS is what lets both stay wired at once.
+- Sharing one SPI bus between them is handled by Bruce itself: `acquireSharedSPI()` in `src/core/bus_HAL.cpp` only tears down and re-inits the bus when the SCK/MISO/MOSI trio actually changes. Since both radios here sit on the same three pins, switching between them costs nothing and needs no reboot.
 
 ---
 

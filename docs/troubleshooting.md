@@ -8,10 +8,10 @@ Common issues and how to fix them. If your problem isn't listed, open an issue w
 
 **Most common cause:** `brucePins.conf` wasn't applied properly. Check:
 
-1. Did you save the config to the **SD card**?
-2. Did you also save it to **LittleFS**? (Both are needed — Bruce reads from one or the other depending on version.)
+1. Did you edit the copy on the storage Bruce actually reads? It uses the **SD card if one is mounted**, and internal **LittleFS** otherwise — so with a card inserted, editing only the LittleFS copy has no effect.
+2. Is the **top-level key your device's own MAC address**, uppercase and colon-separated (e.g. `A1:B2:C3:D4:E5:F6`)? Bruce silently ignores any block that doesn't match its own MAC.
 3. Did you **restart** the Cardputer ADV after saving?
-4. Are the values exactly: `cc1101 cs=13 io0=5` and `nrf24 cs=6 io0=4`?
+4. Are the values exactly `"CC1101_Pins": {"cs": 13, "io0": 5}` and `"NRF24_Pins": {"cs": 6, "io0": 4}`? Note the section names are case-sensitive.
 
 **Second most common cause:** wiring error. With a multimeter in continuity mode:
 
@@ -39,9 +39,11 @@ Check the failing radio's:
 
 ## CC1101 Only Works After Opening NRF24
 
-Known Bruce firmware behavior — not a wiring issue. See [Bruce issue #1909](https://github.com/pr3y/Bruce/issues/1909).
+**Fixed in Bruce 1.14** — if you're on 1.14 or newer you shouldn't hit this at all.
 
-**Workaround:** on each fresh boot, open any NRF24 tool first (e.g. NRF Spectrum). Then switch to CC1101 — it'll work normally.
+On older builds it was a firmware bug rather than a wiring fault: saving pin settings restarted the SD card's SPI instance, which held a different set of SPI pins and never released the bus back to the radios. Reported as [issue #1909](https://github.com/BruceDevices/firmware/issues/1909), fixed by commit [`e391b23`](https://github.com/BruceDevices/firmware/commit/e391b23366d24fc8bc95cea6c997dfaba0c906e2) (2025-12-27), first shipped in release 1.14.
+
+**Workaround for firmware older than 1.14:** on each fresh boot, open any NRF24 tool first (e.g. NRF Spectrum), then switch to CC1101.
 
 ---
 

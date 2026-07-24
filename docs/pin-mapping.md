@@ -13,8 +13,8 @@ Full GPIO assignments for the CC1101 + NRF24 dual-radio setup on the M5Stack Car
 | SCK | GPIO 40 | OUT | EXT 7 |
 | MOSI | GPIO 14 | OUT | EXT 9 |
 | MISO | GPIO 39 | IN | EXT 11 |
-| CC1101 CSN | GPIO 13 | OUT | EXT 13 |
-| CC1101 GDO0 | GPIO 5 | IN | (extension) |
+| CC1101 CSN | GPIO 13 | OUT | EXT 12 |
+| CC1101 GDO0 | GPIO 5 | IN | EXT 13 |
 | NRF24 CSN | GPIO 6 | OUT | EXT 5 |
 | NRF24 CE | GPIO 4 | OUT | EXT 3 |
 | 5V in | — | — | EXT 6 (5VOUT) |
@@ -28,7 +28,7 @@ Not connected: CC1101 GDO2, CC1101 RST, NRF24 IRQ, NRF24 RST.
 
 The 14-pin extension header on Cardputer ADV. Pins marked ✅ are used by this design.
 
-| Pin | Default Label | Used? | Purpose |
+| Pin | M5Stack Label | Used? | Purpose |
 |---|---|---|---|
 | 1 | RESET (G3) | — | free |
 | 2 | 5VIN | — | free |
@@ -37,15 +37,17 @@ The 14-pin extension header on Cardputer ADV. Pins marked ✅ are used by this d
 | 5 | BUSY (G6) | ✅ | NRF24 CSN |
 | 6 | 5VOUT | ✅ | 5V to regulator |
 | 7 | SCK (G40) | ✅ | shared SPI clock |
-| 8 | I2C_SDA (G8) | — | free |
+| 8 | G8 | — | free (I2C SDA on ADV) |
 | 9 | MOSI (G14) | ✅ | shared SPI MOSI |
-| 10 | I2C_SCL (G9) | — | free |
+| 10 | G9 | — | free (I2C SCL on ADV) |
 | 11 | MISO (G39) | ✅ | shared SPI MISO |
-| 12 | UART_RX (G13) | ✅ | CC1101 CSN |
+| 12 | G13 | ✅ | CC1101 CSN |
 | 13 | CS (G5) | ✅ | CC1101 GDO0 |
-| 14 | UART_TX (G15) | — | free |
+| 14 | G15 | — | free |
 
-The "Default Label" reflects M5Stack's documentation. Several pins are repurposed in this design — that's normal on ESP32-S3, which allows flexible GPIO assignment.
+The "M5Stack Label" column reproduces the PinMap in M5Stack's official [Cardputer-Adv documentation](https://docs.m5stack.com/en/core/Cardputer-Adv) — pins 8, 9, 12 and 14 are listed there by GPIO number only, with no assigned function. Several labelled pins are repurposed in this design; that is normal on ESP32-S3, where the GPIO matrix makes most peripheral assignments flexible.
+
+Note that pins 12 and 13 are easy to transpose: **GPIO 13 is on pin 12**, and pin 13 carries GPIO 5.
 
 ---
 
