@@ -8,7 +8,7 @@
 
 > **A simple guide to wiring CC1101 (Sub-GHz) and NRF24L01+ (2.4 GHz) together on the M5Stack Cardputer ADV** — one module with two radios, switchable from Bruce firmware. No DIP switches, no jumper caps, no hardware fiddling after setup.
 
-*Designed and tested by [PINGEQUA](https://www.pingequa.com/) — open-sourced for the Cardputer ADV community.*
+*Designed and tested by [PINGEQUA](https://www.pingequa.com/?utm_source=github&utm_medium=readme&utm_campaign=cardputer-auto-switch) — open-sourced for the Cardputer ADV community.*
 
 ---
 
@@ -123,7 +123,7 @@ If anything doesn't work, see [`docs/troubleshooting.md`](docs/troubleshooting.m
 
 ## Also Available
 
-Don't want to build from scratch? The same design is also available as a ready-made module — the **Hydra RF series** by PINGEQUA, in 433 / 868 / 915 MHz variants. Search "Hydra RF" or visit [pingequa.com](https://www.pingequa.com/) if you're interested.
+Don't want to build from scratch? The same design is also available as a ready-made module — the **Hydra RF series** by PINGEQUA, in 433 / 868 / 915 MHz variants. Search "Hydra RF" or visit [pingequa.com](https://www.pingequa.com/?utm_source=github&utm_medium=readme&utm_campaign=cardputer-auto-switch) if you're interested.
 
 ---
 
